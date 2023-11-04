@@ -1,0 +1,13 @@
+import requests
+
+book_name = input()
+query_book = book_name.lower()
+query_book = query_book.replace(' ','+')
+
+resp = requests.get(f"http://openlibrary.org/search.json?title={query_book}")
+info = resp.json()
+author_name = info['docs'][0]['author_name'][0]
+publishing_year = info['docs'][0]['first_publish_year']
+
+print(f"Author of '{book_name}' is {author_name}. It was first published in {publishing_year}")
+
